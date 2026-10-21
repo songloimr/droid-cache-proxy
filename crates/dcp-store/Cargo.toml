@@ -1,0 +1,15 @@
+[package]
+name = "dcp-store"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Async SQLite writer, JSONL appender and log rotation for droid-cache-proxy"
+
+[dependencies]
+dcp-core.workspace = true
+thiserror.workspace = true
+
+[lints]
+workspace = true

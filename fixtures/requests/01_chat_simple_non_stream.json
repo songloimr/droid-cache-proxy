@@ -1,0 +1,16 @@
+{
+  "model": "deepseek-chat",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a senior Rust software engineer. You provide direct, correct, and idiomatic code."
+    },
+    {
+      "role": "user",
+      "content": "Explain the difference between Arc<Mutex<T>> and Arc<RwLock<T>> in asynchronous Tokio tasks."
+    }
+  ],
+  "temperature": 0.2,
+  "max_tokens": 1024,
+  "stream": false
+}

@@ -1,0 +1,21 @@
+[package]
+name = "dcp"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Droid Cache Proxy CLI: serve, stats, analyze and report"
+
+[[bin]]
+name = "dcp"
+path = "src/main.rs"
+
+[dependencies]
+anyhow.workspace = true
+clap.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+
+[lints]
+workspace = true

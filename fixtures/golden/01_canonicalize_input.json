@@ -1,0 +1,47 @@
+{
+  "model": "deepseek-chat",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "write_file",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "content": { "type": "string", "description": "File body to write" },
+            "path": { "type": "string", "description": "File destination" }
+          },
+          "required": ["path", "content"]
+        },
+        "description": "Writes full content to file"
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file",
+        "description": "Reads file with offset and limit",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "limit": { "type": "integer" },
+            "offset": { "type": "integer" },
+            "file_path": { "type": "string" }
+          },
+          "required": ["file_path"]
+        }
+      }
+    }
+  ],
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a code assistant."
+    },
+    {
+      "role": "user",
+      "content": "Read and write."
+    }
+  ],
+  "stream": true
+}

@@ -1,0 +1,16 @@
+[package]
+name = "dcp-analyze"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Offline log analysis, prefix divergence finder and report generator"
+
+[dependencies]
+dcp-core.workspace = true
+dcp-store.workspace = true
+thiserror.workspace = true
+
+[lints]
+workspace = true

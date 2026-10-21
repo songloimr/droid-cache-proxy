@@ -1,0 +1,69 @@
+{
+  "model": "deepseek-chat",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are Droid, an autonomous software engineering agent. You work directly in the repository."
+    },
+    {
+      "role": "user",
+      "content": "Please check the contents of Cargo.toml."
+    },
+    {
+      "role": "assistant",
+      "content": null,
+      "tool_calls": [
+        {
+          "id": "call_abc12345",
+          "type": "function",
+          "function": {
+            "name": "read_file",
+            "arguments": "{\"file_path\":\"/workspace/Cargo.toml\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_abc12345",
+      "content": "[package]\nname = \"sample\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[dependencies]\ntokio = { version = \"1.0\", features = [\"full\"] }\n"
+    },
+    {
+      "role": "user",
+      "content": "Now add serde and serde_json to dependencies."
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file",
+        "description": "Read file contents",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "file_path": { "type": "string" }
+          },
+          "required": ["file_path"]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "edit_file",
+        "description": "Replace string in file",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "file_path": { "type": "string" },
+            "old_str": { "type": "string" },
+            "new_str": { "type": "string" }
+          },
+          "required": ["file_path", "old_str", "new_str"]
+        }
+      }
+    }
+  ],
+  "stream": true
+}

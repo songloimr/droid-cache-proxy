@@ -1,0 +1,17 @@
+[package]
+name = "dcp-proxy"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Axum gateway server, HTTP forwarder and SSE relay"
+
+[dependencies]
+dcp-core.workspace = true
+dcp-store.workspace = true
+dcp-transform.workspace = true
+thiserror.workspace = true
+
+[lints]
+workspace = true

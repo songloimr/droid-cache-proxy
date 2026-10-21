@@ -1,0 +1,16 @@
+{
+  "id": "chatcmpl-generic-no-usage",
+  "object": "chat.completion",
+  "created": 1729435950,
+  "model": "local-mock-model",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Hello! Here is a simple 1-line hello world in Rust:\nfn main() { println!(\"Hello, world!\"); }"
+      },
+      "finish_reason": "stop"
+    }
+  ]
+}

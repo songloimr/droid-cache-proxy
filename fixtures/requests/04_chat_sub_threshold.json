@@ -1,0 +1,10 @@
+{
+  "model": "deepseek-chat",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Hello, can you give me a 1-line hello world in Rust?"
+    }
+  ],
+  "stream": false
+}

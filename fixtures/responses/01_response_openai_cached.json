@@ -1,0 +1,24 @@
+{
+  "id": "chatcmpl-9uY123abc456",
+  "object": "chat.completion",
+  "created": 1729435925,
+  "model": "gpt-4o-2024-08-06",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "In asynchronous Tokio applications, the choice between Arc<Mutex<T>> and Arc<RwLock<T>> depends on your read-to-write ratio."
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 12500,
+    "completion_tokens": 350,
+    "total_tokens": 12850,
+    "prompt_tokens_details": {
+      "cached_tokens": 11264
+    }
+  }
+}

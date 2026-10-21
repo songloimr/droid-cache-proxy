@@ -1,0 +1,49 @@
+{
+  "model": "deepseek-chat",
+  "messages": [
+    {
+      "role": "user",
+      "content": "List files."
+    },
+    {
+      "role": "assistant",
+      "content": null,
+      "tool_calls": [
+        {
+          "id": "call_ls001",
+          "type": "function",
+          "function": {
+            "name": "ls",
+            "arguments": "{\"path\":\".\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_ls001",
+      "content": "Cargo.toml\nsrc/"
+    },
+    {
+      "role": "user",
+      "content": "Show Cargo.toml."
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "ls",
+        "description": "List directory contents",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": { "type": "string" }
+          },
+          "required": ["path"]
+        }
+      }
+    }
+  ],
+  "stream": true
+}

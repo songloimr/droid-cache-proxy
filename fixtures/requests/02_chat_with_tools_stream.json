@@ -1,0 +1,48 @@
+{
+  "model": "deepseek-chat",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are Droid, an AI coding agent. Follow repository rules and write tests."
+    },
+    {
+      "role": "user",
+      "content": "Find all functions that parse config files in the project."
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "search_code",
+        "description": "Perform grep or AST code search across repository files",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "query": { "type": "string", "description": "Search pattern or query" },
+            "path": { "type": "string", "description": "Optional subdirectory to restrict search" }
+          },
+          "required": ["query"]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file",
+        "description": "Read file contents with line offsets",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "file_path": { "type": "string", "description": "Absolute path to file" },
+            "offset": { "type": "integer", "description": "1-based starting line number" },
+            "limit": { "type": "integer", "description": "Max lines to return" }
+          },
+          "required": ["file_path"]
+        }
+      }
+    }
+  ],
+  "temperature": 0.0,
+  "stream": true
+}

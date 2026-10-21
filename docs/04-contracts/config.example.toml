@@ -1,0 +1,86 @@
+# ==============================================================================
+# Droid Cache Proxy (dcp) - File Cấu Hình Mẫu
+# Sao chép file này thành config.toml và chỉnh sửa theo nhu cầu sử dụng.
+# ==============================================================================
+
+[server]
+# Địa chỉ IP và cổng socket để proxy lắng nghe.
+# Mặc định: "127.0.0.1:6789"
+listen = "127.0.0.1:6789"
+
+# Số lượng kết nối đồng thời tối đa cho phép
+max_connections = 1024
+
+[upstream]
+# URL gốc của upstream OpenAI-compatible endpoint.
+# Ví dụ:
+#   - OpenAI: "https://api.openai.com/v1"
+#   - DeepSeek: "https://api.deepseek.com/v1"
+#   - Local vLLM / SGLang: "http://127.0.0.1:8000/v1"
+#   - OpenRouter: "https://openrouter.ai/api/v1"
+base_url = "https://api.deepseek.com/v1"
+
+# Tên biến môi trường chứa API Key thực tế để gửi sang upstream.
+# Proxy sẽ đọc giá trị này và ghi đè vào header "Authorization: Bearer <KEY>"
+# Tuyệt đối không lưu trực tiếp API key thô vào file cấu hình này!
+api_key_env = "DCP_API_KEY"
+
+# Thời gian chờ tối đa cho mỗi request (tính bằng giây).
+# Các tác vụ coding lớn sinh nhiều mã nguồn nên để tối thiểu 300s.
+timeout_secs = 300
+
+# Thời gian chờ thiết lập kết nối TCP (giây)
+connect_timeout_secs = 10
+
+[stream]
+# Tự động chèn `stream_options.include_usage = true` vào các request streaming.
+# Giúp nhận thông tin usage (cached_tokens) ở chunk SSE cuối cùng để tính cache hit.
+# Nếu client ban đầu không yêu cầu usage, proxy sẽ tự động lọc bỏ chunk này trước khi trả về client.
+inject_include_usage = true
+
+[log]
+# Thư mục lưu trữ database SQLite và file JSONL log.
+# Hỗ trợ ký tự "~" trỏ về home directory của người dùng.
+dir = "~/.dcp"
+
+# Tên file cơ sở dữ liệu SQLite
+db_filename = "dcp.db"
+
+# Bật/tắt việc ghi full payload thô ra file JSONL theo ngày (dùng cho phân tích offline)
+jsonl_enabled = true
+
+# Dung lượng bộ đệm in-memory channel giữa luồng proxy và luồng ghi log
+channel_capacity = 10000
+
+# Thời gian chờ tối đa trước khi ghi gom batch vào SQLite (milli-giây)
+batch_flush_ms = 500
+
+# Kích thước batch ghi vào SQLite (số bản ghi)
+batch_size = 50
+
+# Số ngày lưu trữ file log trước khi tự động xoay vòng dọn dẹp (0 là không xóa)
+retention_days = 30
+
+[transform]
+# Chế độ biến đổi request để tối ưu cache hit (Giai đoạn 2):
+#   - "off": Tắt hoàn toàn pipeline biến đổi (dùng cho Giai đoạn 1 - passthrough)
+#   - "shadow": Thực thi biến đổi trong RAM, ghi log so sánh hash, nhưng vẫn gửi request gốc lên upstream
+#   - "on": Áp dụng request sau biến đổi và gửi lên upstream
+mode = "off"
+
+# Định danh phiên bản thuật toán transform.
+# Giá trị này được ghi vào transform_version (SQLite) và transformed_request.version (JSONL).
+version = "v1.0.0"
+
+# Chuẩn hóa JSON schema của tools và sắp xếp mảng tools theo alphabet tên function
+canonicalize = true
+
+# Căn chỉnh thứ tự các khối trong prompt theo chuẩn: System -> Tools -> Lịch sử -> Turn hiện tại
+prefix_align = true
+
+# Bóc tách ngày giờ thực tế / git status ra khỏi System prompt đưa xuống cuối hội thoại
+# CẢNH BÁO: Mặc định tắt (false) vì có thể làm thay đổi vị trí ngữ cảnh trong prompt
+volatile_extract = false
+
+# File quy tắc tùy chỉnh regex bổ sung (tùy chọn)
+custom_rules_file = ""

@@ -1,0 +1,23 @@
+{
+  "id": "dsk-cmpl-8721ab90ef",
+  "object": "chat.completion",
+  "created": 1729435930,
+  "model": "deepseek-chat",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "To add serde dependencies, open Cargo.toml and insert serde = { version = \"1.0\", features = [\"derive\"] }."
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 18450,
+    "completion_tokens": 210,
+    "total_tokens": 18660,
+    "prompt_cache_hit_tokens": 16384,
+    "prompt_cache_miss_tokens": 2066
+  }
+}
